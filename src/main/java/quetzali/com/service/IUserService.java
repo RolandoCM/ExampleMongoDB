@@ -9,5 +9,6 @@ public interface IUserService {
 	UserEntity findUserCve( String cve);
 	UserEntity saveUser(UserEntity user);
 	UserEntity updateUser(UserEntity user);
+	void deleteUser(String user);
 	
 }

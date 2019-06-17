@@ -1,9 +1,10 @@
 package quetzali.com.constants;
 
 public enum Views {
+	INDEX("index"),
 	USUARIOS("all_users"),
-	USUARIO_DERALLE("user_details"),
-	USER_REGISTRY("user_registry");
+	USUARIO_DERALLE("registry"),
+	USER_REGISTRY("update");
 	
 	private String view;
 	private Views(String view) {
