@@ -10,6 +10,13 @@ import quetzali.com.dao.entity.UserEntity;
 import quetzali.com.dao.repository.UserRepository;
 import quetzali.com.service.IUserService;
 
+/**
+ * <h1>User Service Implementation</h1>
+ * 
+ * Implementación de la interface {@link IUserService}
+ * 
+ * @see IUserService
+ */
 @Log4j
 @Service
 public class UserServiceImpl implements IUserService{

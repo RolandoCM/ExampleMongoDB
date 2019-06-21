@@ -20,6 +20,10 @@ import quetzali.com.constants.Views;
 import quetzali.com.dao.entity.UserEntity;
 import quetzali.com.service.IUserService;
 
+/**
+ * <h1>User Controller</h1> definición de metodos controller para redireccionar
+ * vistas, rederizarlas y realizar metodos POST, GET, PUT
+ */
 @Log4j
 @Controller
 @RequestMapping("/")
@@ -27,45 +31,44 @@ public class UserController {
 
 	@Autowired
 	private IUserService userService;
-	
-	@GetMapping("/")
-	public String index() {
-		return Views.INDEX.getView();
-	}
+
 	@GetMapping("/users")
 	public String users(Model model) {
 		List<UserEntity> users = userService.findAll();
-		log.info("tamaño de lista: "+users.size());
+		log.info("tamaño de lista: " + users.size());
 		model.addAttribute("users", users);
 		UserEntity user = new UserEntity();
 		model.addAttribute("user", user);
 		return Views.USUARIOS.getView();
 	}
-	
+
 	@PostMapping("/save_user")
 	public String saveUser(UserEntity user, Model model) {
 		log.info("Ok");
 		userService.saveUser(user);
 		return "redirect:/users";
 	}
+
 	@GetMapping("/delete_user")
-	public String deleteUser(@RequestParam(name="idUser") String idUser) {
-		log.info("Elemento eliminado: "+idUser);
+	public String deleteUser(@RequestParam(name = "idUser") String idUser) {
+		log.info("Elemento eliminado: " + idUser);
 		userService.deleteUser(idUser);
 		return "redirect:/users";
 	}
+
 	@GetMapping("/find_user")
-	public ResponseEntity<?> findUser(@RequestParam(name="cve") String cve){
+	public ResponseEntity<?> findUser(@RequestParam(name = "cve") String cve) {
 		Map<String, Object> response = new HashMap<>();
-		log.info("peticion de actualizacion "+cve);
+		log.info("peticion de actualizacion " + cve);
 		UserEntity user = userService.findUserCve(cve);
-		log.info("Usuario: "+user);
+		log.info("Usuario: " + user);
 		response.put("user", user);
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
+
 	@PutMapping("/update_user")
 	public String updateUser(Model model, UserEntity user) {
-		log.info("User: "+ user);
+		log.info("User: " + user);
 		userService.updateUser(user);
 		return "redirect:/users";
 	}
